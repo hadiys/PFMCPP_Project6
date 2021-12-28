@@ -136,8 +136,8 @@ int main()
     
     U u1;
     float updatedValue = 5.f;
-    std::cout << "reduceDistanceOfU() u1's multiplied values: " << StaticFunc::reduceDistanceOfU( &u1, &updatedValue ) << std::endl;                  //11
+    std::cout << "reduceDistanceOfU() u1's multiplied values: " << StaticFunc::reduceDistanceOfU(&u1, &updatedValue) << std::endl;                  //11
     
     U u2;
-    std::cout << "reduceDistance() u2's multiplied values: " << u2.reduceDistance( &updatedValue ) << std::endl;
+    std::cout << "reduceDistance() u2's multiplied values: " << u2.reduceDistance(&updatedValue) << std::endl;
 }
