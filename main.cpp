@@ -77,7 +77,7 @@ struct U
     float f1 { 0 }, f2 { 0 };
     float reduceDistance(float* newValue)      //12
     {
-         std::cout << "U's f1 value: " << this->f1 << std::endl;
+        std::cout << "U's f1 value: " << this->f1 << std::endl;
         this->f1 = *newValue;
         std::cout << "U's f1 updated value: " << this->f1 << std::endl;
         while( std::abs(this->f2 - this->f1) > 0.001f )
