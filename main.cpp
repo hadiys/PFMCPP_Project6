@@ -66,8 +66,12 @@ struct V                                //4
 {
     T* compare(T* a, T* b) //5
     {
-        if( a->value < b->value ) return a;
-        if( a->value > b->value ) return b;
+        if(a != nullptr && b != nullptr)
+        {
+            if( a->value < b->value ) return a;
+            if( a->value > b->value ) return b;
+        }
+
         return nullptr;
     }
 };
@@ -77,18 +81,24 @@ struct U
     float f1 { 0 }, f2 { 0 };
     float reduceDistance(float* newValue)      //12
     {
-        std::cout << "U's f1 value: " << this->f1 << std::endl;
-        this->f1 = *newValue;
-        std::cout << "U's f1 updated value: " << this->f1 << std::endl;
-        while( std::abs(this->f2 - this->f1) > 0.001f )
+        if(newValue != nullptr)
         {
-            /*
-             write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
-             */
-            this->f2 += 0.1f;
-        }
-        std::cout << "U's f2 updated value: " << this->f2 << std::endl;
-        return this->f2 * this->f1;
+            std::cout << "U's f1 value: " << this->f1 << std::endl;
+            this->f1 = *newValue;
+            std::cout << "U's f1 updated value: " << this->f1 << std::endl;
+            while( std::abs(this->f2 - this->f1) > 0.001f )
+            {
+                /*
+                write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
+                */
+                this->f2 += 0.1f;
+            }
+            std::cout << "U's f2 updated value: " << this->f2 << std::endl;
+            return this->f2 * this->f1;
+            }
+
+            std::cout << "ERROR: nullptr" << std::endl;
+            return 0.f;
     }
 };
 
@@ -96,18 +106,24 @@ struct StaticFunc
 {
     static float reduceDistanceOfU(U* that, float* newValue )        //10
     {
-        std::cout << "U's f1 value: " << that->f1 << std::endl;
-        that->f1 = *newValue;
-        std::cout << "U's f1 updated value: " << that->f1 << std::endl;
-        while( std::abs(that->f2 - that->f1) > 0.001f )
+        if(that != nullptr && newValue != nullptr)
         {
-            /*
-             write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
-             */
-            that->f2 += 0.1f;
+            std::cout << "U's f1 value: " << that->f1 << std::endl;
+            that->f1 = *newValue;
+            std::cout << "U's f1 updated value: " << that->f1 << std::endl;
+            while( std::abs(that->f2 - that->f1) > 0.001f )
+            {
+                /*
+                write something that makes the distance between that-><#name2#> and that-><#name1#> get smaller
+                */
+                that->f2 += 0.1f;
+            }
+            std::cout << "U's f2 updated value: " << that->f2 << std::endl;
+            return that->f2 * that->f1;
         }
-        std::cout << "U's f2 updated value: " << that->f2 << std::endl;
-        return that->f2 * that->f1;
+        
+        std::cout << "ERROR: nullptr" << std::endl;
+        return 0.f;
     }
 };
         
@@ -132,7 +148,8 @@ int main()
     
     V f;                                            //7
     auto* smaller = f.compare(&t1, &t2);                              //8
-    (smaller != nullptr) ? std::cout << "the smaller one is << " << smaller->name << std::endl : std::cout << "smaller == nullptr" << std::endl; //9
+    if(smaller != nullptr) 
+        std::cout << "the smaller one is << " << smaller->name << std::endl; //9
     
     U u1;
     float updatedValue = 5.f;
